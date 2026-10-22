@@ -1,0 +1,38 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.container {
+  max-width: 1140px;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .card-body {
+    padding: 1rem !important;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+  }
+}

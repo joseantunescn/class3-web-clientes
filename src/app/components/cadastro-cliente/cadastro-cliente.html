@@ -1,0 +1,90 @@
+
+<div class="container-fluid px-0">
+  <div class="card cadastro-card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Cadastro de Cliente</h5>
+    </div>
+
+    <div class="card-body">
+      <form>
+        <!-- Nome -->
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome completo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nome"
+            name="nome"
+            placeholder="Digite seu nome completo"
+            autocomplete="name"
+            required
+          />
+        </div>
+
+        <!-- E-mail -->
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="exemplo@email.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <!-- CPF -->
+        <div class="mb-3">
+          <label for="cpf" class="form-label">CPF</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cpf"
+            name="cpf"
+            placeholder="000.000.000-00"
+            autocomplete="off"
+            inputmode="numeric"
+            maxlength="14"
+            pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}"
+            title="Informe um CPF com 11 números"
+            required
+          />
+          <div class="form-text">
+            Informe o CPF com ou sem pontuação.
+          </div>
+        </div>
+
+        <!-- Plano -->
+        <div class="mb-3">
+          <label for="planoId" class="form-label">Plano</label>
+          <select
+            class="form-select"
+            id="planoId"
+            name="planoId"
+            required
+          >
+            <option value="" selected disabled>
+              Selecione um plano
+            </option>
+            <option value="1">Plano Básico</option>
+            <option value="2">Plano Intermediário</option>
+            <option value="3">Plano Premium</option>
+          </select>
+        </div>
+
+        <!-- Botões -->
+        <div class="d-grid gap-2 d-sm-flex">
+          <button type="submit" class="btn btn-primary flex-fill">
+            Cadastrar cliente
+          </button>
+
+          <button type="reset" class="btn btn-outline-secondary">
+            Limpar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

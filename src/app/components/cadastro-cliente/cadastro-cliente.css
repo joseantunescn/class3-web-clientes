@@ -1,0 +1,51 @@
+
+.cadastro-card {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cadastro-card .card-header {
+  padding: 1rem;
+}
+
+.cadastro-card .card-body {
+  padding: 1.25rem;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+  border-radius: 6px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.form-text {
+  font-size: 0.8rem;
+}
+
+@media (max-width: 575.98px) {
+  .cadastro-card .card-body {
+    padding: 1rem;
+  }
+
+  .cadastro-card .card-header {
+    padding: 0.85rem 1rem;
+  }
+
+  .cadastro-card .btn {
+    min-height: 44px;
+  }
+}

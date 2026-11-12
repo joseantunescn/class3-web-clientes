@@ -1,0 +1,134 @@
+<h4>Consulta de cliente</h4>
+
+<form [formGroup]="formConsulta" (ngSubmit)="consultarClientes()">
+
+    <div class="row mb-3">
+        <div class="col-md-9">
+            <input type="text" class="form-control" formControlName="nome"
+                placeholder="Digite o nome do cliente desejado" />
+        </div>
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-success shadow" [disabled]="formConsulta.invalid"
+                value="Realizar Pesquisa" />
+        </div>
+    </div>
+
+    @if(formConsulta.get('nome')?.touched && formConsulta.get('nome')?.invalid) {
+    <div class="text-danger">
+        O nome do cliente é obrigatório e deve ter pelo menos 8 caracteres.
+    </div>
+    }
+
+</form>
+
+<div class="mb-3">
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th>Nome do cliente</th>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(c of clientes(); track c) {
+            <tr>
+                <td>{{ c.nome | uppercase }}</td>
+                <td>{{ c.email | lowercase }}</td>
+                <td>{{ c.cpf }}</td>
+                <td>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        (click)="obterCliente(c.id)"
+                        class="btn btn-outline-primary btn-sm me-1">Editar</button>
+                    <button class="btn btn-outline-danger btn-sm" (click)="excluirCliente(c.id)">Excluir</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    Quantidade de clientes: {{ clientes().length }}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!-- Janela modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" arialabelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Edição de cliente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Utilize o formulário abaixo para editar os dados do cliente.
+                </p>
+
+                <form [formGroup]="formEdicao" (ngSubmit)="editarCliente()">
+                    <div class="mb-3">
+                        <label>Nome do cliente:</label>
+                        <input type="text" class="form-control" formControlName="nome" />
+                        @if(formEdicao.get('nome')?.touched
+                        && formEdicao.get('nome')?.invalid) {
+                        <div class="text-danger">
+                            O nome do cliente é obrigatório
+                            e deve ter pelo menos 8 caracteres.
+                        </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label>CPF:</label>
+                        <input type="text" class="form-control" formControlName="cpf" />
+                        @if(formEdicao.get('cpf')?.touched
+                        && formEdicao.get('cpf')?.invalid) {
+                        <div class="text-danger">
+                            O cpf do cliente é obrigatório
+                            e deve conter exatamente 11 números.
+                        </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" formControlName="email" />
+                        @if(formEdicao.get('email')?.touched
+                        && formEdicao.get('email')?.invalid) {
+                        <div class="text-danger">
+                            O email do cliente é obrigatório
+                            e deve conter um endereço de email válido.
+                        </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label>Escolha o plano</label>
+                        <select class="form-select" formControlName="planoId">
+                            <option value="">Selecione</option>
+                            @for(p of planos(); track p) {
+                            <option value="{{ p.id }}">
+                                {{ p.nome | uppercase }}
+                                - {{ p.valorMensal | currency: 'BRL' }}
+                                por mês
+                            </option>
+                            }
+                        </select>
+                        @if(formEdicao.get('planoId')?.touched
+                        && formEdicao.get('planoId')?.invalid) {
+                        <div class="text-danger">
+                            O plano do cliente é obrigatório.
+                        </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-primary shadow" [disabled]="formEdicao.invalid" value="Salvar alterações" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

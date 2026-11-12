@@ -1,0 +1,66 @@
+<h4>Cadastro de cliente</h4>
+
+<form [formGroup]="formCadastro" (ngSubmit)="cadastrarCliente()">
+
+    <div class="mb-3">
+        <label>Nome do cliente:</label>
+        <input type="text" class="form-control" formControlName="nome"/>
+
+        @if(formCadastro.get('nome')?.touched && formCadastro.get('nome')?.invalid) {
+            <div class="text-danger">
+                O nome do cliente é obrigatório e deve ter pelo menos 8 caracteres.
+            </div>
+        }
+
+    </div>
+
+    <div class="mb-3">
+        <label>CPF:</label>
+        <input type="text" class="form-control" formControlName="cpf"/>
+
+        @if(formCadastro.get('cpf')?.touched && formCadastro.get('cpf')?.invalid) {
+            <div class="text-danger">
+                O cpf do cliente é obrigatório e deve conter exatamente 11 números.
+            </div>
+        }
+
+    </div>
+
+    <div class="mb-3">
+        <label>Email:</label>
+        <input type="text" class="form-control" formControlName="email"/>
+
+        @if(formCadastro.get('email')?.touched && formCadastro.get('email')?.invalid) {
+            <div class="text-danger">
+                O email do cliente é obrigatório e deve conter um endereço de email válido.
+            </div>
+        }
+
+    </div>
+
+    <div class="mb-3">
+        <label>Escolha o plano</label>
+        <select class="form-select" formControlName="planoId">
+            <option value="">Selecione</option>
+            @for(p of planos(); track p) {
+                <option value="{{ p.id }}">
+                    {{ p.nome | uppercase }} - {{ p.valorMensal | currency: 'BRL' }} por mês
+                </option>
+            }
+        </select>
+
+        @if(formCadastro.get('planoId')?.touched && formCadastro.get('planoId')?.invalid) {
+            <div class="text-danger">
+                O plano do cliente é obrigatório.
+            </div>
+        }
+
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" class="btn btn-success shadow"
+            [disabled]="formCadastro.invalid"
+            value="Realizar cadastro"/>
+    </div>
+
+</form>
